@@ -13,9 +13,9 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
 
     Hilo hilo;
     int tiempo=0;
-    int acomulado=0, puntajePartida=0;
+    int puntajePartida=0;
     int campo=0, perdidas=5;
-    int nivel=0;
+    int nivel=5, muertes=0;
     boolean pause=true;
     FRM_EntradaJuego fRM_EntradaJuego;
     
@@ -27,6 +27,7 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
         setLocationRelativeTo(this);
         this.fRM_EntradaJuego=fRM_EntradaJuego;
         hilo=new Hilo(this);
+        hilo.start();
     }
     public void moverZombies()
     {
@@ -37,7 +38,7 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
             perdidas--;
         }
         else
-            jl_Zombie1.setLocation(jl_Zombie1.getX()-(nivel-4), jl_Zombie1.getY());
+            jl_Zombie1.setLocation(jl_Zombie1.getX()-(nivel), jl_Zombie1.getY());
         //Mover Zombie2
         if(jl_Zombie2.getX()+95<jl_Fondo.getX())
         {
@@ -45,25 +46,28 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
             perdidas--;
         }
         else
-            jl_Zombie2.setLocation(jl_Zombie2.getX()-(nivel-4), jl_Zombie2.getY());
+            jl_Zombie2.setLocation(jl_Zombie2.getX()-(nivel), jl_Zombie2.getY());
         
+        verificarBarraVida();
+    }
+    
+    public void verificarBarraVida()
+    {
         if(perdidas>=0)
         {
             jl_BarraVida.setIcon(new ImageIcon(getClass().getResource("/img/barraVida"+perdidas+".png")));
         }
         else
         {
-            if(perdidas==-1)
+            if(perdidas<0)
             {
                 JOptionPane.showMessageDialog(this, "", "Game Over", JOptionPane.OK_CANCEL_OPTION, new ImageIcon(getClass().getResource("/img/gameOver.jpg")));
                 
-                Record record=new Record(JOptionPane.showInputDialog("Digita tu Nombre:"), (acomulado+puntajePartida)+"");
+                Record record=new Record(JOptionPane.showInputDialog("Digita tu Nombre:"), puntajePartida+"");
                 fRM_EntradaJuego.controlador_FRM_EntradaJuego.metodosRecord.agregarRecord(record);
-                this.hide();
-                hilo.stop();
-//                fRM_EntradaJuego.setPuntos(0);
                 fRM_EntradaJuego.controlador_FRM_EntradaJuego.metodosRecord.ordenar(fRM_EntradaJuego);
-                perdidas--;
+                hilo.corre=false;
+                this.hide();
             }
         }
     }
@@ -73,24 +77,32 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
         if(jl_Mira.getX()+90>jl_Zombie1.getX()+5 && jl_Mira.getX()+90<jl_Zombie1.getX()+60 && jl_Zombie1.isVisible() && jl_Mira.getY()+90>jl_Zombie1.getY()+3 && jl_Mira.getY()+90<jl_Zombie1.getY()+60)
         {
             jl_Zombie1.setLocation(jl_Fondo.getWidth()+15,jl_Zombie1.getY());
-            nivel++;
+            muertes++;
             puntaje();
         }
         // Muerte Zombie2
         if(jl_Mira.getX()+90>jl_Zombie2.getX()+2 && jl_Mira.getX()+90<jl_Zombie2.getX()+40 && jl_Zombie2.isVisible() && jl_Mira.getY()+90>jl_Zombie2.getY()+70 && jl_Mira.getY()+90<jl_Zombie2.getY()+110)
         {
             jl_Zombie2.setLocation(jl_Fondo.getWidth()+25,jl_Zombie2.getY());
-            nivel++;
+            muertes++;
             puntaje();
         }
+        
+        if(muertes>=3)
+        {
+            nivel++;
+            muertes=0;
+        }
+            
     }
     
     public void setcampoJuego(int campo)
     {
+        System.out.println("Campo de juego:" +campo);
         if(campo==1)
-        this.jl_Fondo.setIcon(new ImageIcon(getClass().getResource("/img/fondo"+campo+".jpg")));
+        this.jl_Fondo.setIcon(new ImageIcon(getClass().getResource("/img/fondo.png")));
         else
-            this.jl_Fondo.setIcon(new ImageIcon(getClass().getResource("/img/fondo"+campo+".gif")));
+            this.jl_Fondo.setIcon(new ImageIcon(getClass().getResource("/img/fondo1.jpg")));
             
     }
     public void timer()
@@ -111,37 +123,8 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
         String digitos="0";
         digitos=digitos+puntajePartida;
         digitos=digitos.substring(digitos.length()-2, digitos.length());
-        if(puntajePartida==15)
-        {
-            this.setVisible(false);
-            JOptionPane.showMessageDialog(this, "", "Winner, pasarás al siguiente nivel!!!", JOptionPane.OK_CANCEL_OPTION, new ImageIcon(getClass().getResource("/img/winner.gif")));
-            gane();
-            inicializarValores();
-            this.setVisible(true);
-        }
-        else
-        {
-            jl_CantPuntaje1.setIcon(new ImageIcon(getClass().getResource("/img/"+digitos.charAt(1)+".png")));
-            jl_CantPuntaje2.setIcon(new ImageIcon(getClass().getResource("/img/"+digitos.charAt(0)+".png")));
-        }
-    }
-    
-    public void gane()
-    {
-//        if(fRM_EntradaJuego.getNivel().equalsIgnoreCase("fácil"))
-//            fRM_EntradaJuego.gane(puntajePartida, 1);
-//        else if(fRM_EntradaJuego.getNivel().equalsIgnoreCase("medio"))
-//            fRM_EntradaJuego.gane(puntajePartida, 2);
-//        else if(fRM_EntradaJuego.getNivel().equalsIgnoreCase("dificil"))
-//            fRM_EntradaJuego.gane(puntajePartida, 3);
-//        if(fRM_EntradaJuego.getNivel().equalsIgnoreCase("NigthMare"))
-//        {
-//            Record record=new Record(JOptionPane.showInputDialog(this, "Has superado el juego en el nivel más complicado, registra tu Nombre"), fRM_EntradaJuego.getPuntos()+"");
-//            fRM_EntradaJuego.controlador_FRM_EntradaJuego.metodosRecord.agregarRecord(record);
-//            fRM_EntradaJuego.setPuntos(0);
-//            fRM_EntradaJuego.controlador_FRM_EntradaJuego.metodosRecord.ordenar(fRM_EntradaJuego);
-//            this.hide();
-//        }
+        jl_CantPuntaje1.setIcon(new ImageIcon(getClass().getResource("/img/"+digitos.charAt(1)+".png")));
+        jl_CantPuntaje2.setIcon(new ImageIcon(getClass().getResource("/img/"+digitos.charAt(0)+".png")));
         
     }
     
@@ -174,16 +157,6 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
-            }
-        });
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                formComponentHidden(evt);
-            }
-        });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
             }
         });
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -302,16 +275,15 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
         System.out.println(evt.getKeyCode());
         
         if(evt.getKeyCode()==27)
-           if(pause)
+           if(hilo.corre)
            {
-               hilo.suspend();
-               JOptionPane.showMessageDialog(this, "PAUSE");
-               pause=false;
+               hilo.corre=false;
+               this.setTitle("PAUSE");
            }
             else
            {
-               hilo.resume();
-               pause=true;
+               hilo.corre=true;
+               this.setTitle("");
            }
            
         if(evt.getKeyCode()==39)
@@ -333,38 +305,18 @@ public class FRM_VentanaJuego extends javax.swing.JFrame
 
     public void inicializarValores()
     {
-//        tiempo=0;
-//        acomulado=fRM_EntradaJuego.getPuntos();
-//        puntajePartida=0;
-//        jl_CantPuntaje1.setIcon(new ImageIcon(getClass().getResource("/img/0.png")));
-//        jl_CantPuntaje2.setIcon(new ImageIcon(getClass().getResource("/img/0.png")));
-//        campo=0; perdidas=5;
-//        nivel=0;
-//        
-//         if(fRM_EntradaJuego.getNivel().equalsIgnoreCase("fácil"))
-//            nivel=8;
-//        else if(fRM_EntradaJuego.getNivel().equalsIgnoreCase("medio"))
-//            nivel=13;
-//        else if(fRM_EntradaJuego.getNivel().equalsIgnoreCase("dificil"))
-//            nivel=17;
-//        else
-//            nivel=23;
-//         
-//        setcampoJuego(fRM_EntradaJuego.getCampo());
-//        hilo=new Hilo(this);
-//        hilo.start();
+        tiempo=0;
+        puntajePartida=0;
+        jl_CantPuntaje1.setIcon(new ImageIcon(getClass().getResource("/img/0.png")));
+        jl_CantPuntaje2.setIcon(new ImageIcon(getClass().getResource("/img/0.png")));
+        campo=0; perdidas=5;
+        nivel=15;
+         hilo.corre=true;
+        setcampoJuego(fRM_EntradaJuego.getCampo());
     }
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         jl_Mira.setLocation(evt.getLocationOnScreen().x-175, evt.getLocationOnScreen().y-270);
     }//GEN-LAST:event_formMouseMoved
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-       inicializarValores();
-    }//GEN-LAST:event_formWindowActivated
-
-    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        hilo=null;
-    }//GEN-LAST:event_formComponentHidden
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         disparo=newAudioClip(getClass().getResource("/music/Disparo seco.wav"));

@@ -53,19 +53,19 @@ public class MetodosRecord
                 }
             }
         }
-//        fRM_EntradaJuego.limpiarTabla();
-//        for (int i = 0; i < array.size(); i++) 
-//        {
-//            if(i<5)
-//            {
-//                record[0]=array.get(i).getNombre();
-//                record[1]=array.get(i).getRecord();
-//                fRM_EntradaJuego.colocarMejoresRecords(record);
-//            }
-//            else
-//            {
-//                array.remove(i);
-//            }
-//        }
+        fRM_EntradaJuego.limpiarTabla();
+        for (int i = 0; i < array.size(); i++) 
+        {
+            if(i<5)
+            {
+                record[0]=array.get(i).getNombre();
+                record[1]=array.get(i).getRecord();
+                fRM_EntradaJuego.colocarMejoresRecords(record);
+            }
+            else
+            {
+                array.remove(i);
+            }
+        }
     }
 }

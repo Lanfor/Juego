@@ -26,7 +26,7 @@ public class Panel_EntradaJuego extends javax.swing.JPanel {
     public Panel_EntradaJuego() {
         initComponents();
         musica= newAudioClip(getClass().getResource("/music/canción expedientes secreto x.wav"));
-        //musica.loop();
+        musica.loop();
         imagenSonido=(ImageIcon)btn_Sonido.getIcon();
         modelo=new DefaultTableModel();
         colocarTitulosTabla();
@@ -57,37 +57,17 @@ public class Panel_EntradaJuego extends javax.swing.JPanel {
         else
         {
             btn_Sonido.setIcon(imagenSonido);
-            //musica.loop();
+            musica.loop();
         }
             
     }
-    public String getNivel()
-    {
-        return ""+jcb_NivelJuego.getSelectedItem();
-    }
     public int getCampo()
     {
-        return (int)jcb_CampoJuego.getSelectedIndex()+1;
+        return jcb_CampoJuego.getSelectedIndex()+1;
     }
     public void reproducirMusica()
     {
         musica.play();
-    }
-    
-    public void gane(int puntos, int nivel)
-    {
-        this.puntos+=puntos;
-        jcb_NivelJuego.setSelectedIndex(nivel);
-    }
-    
-     public void setPuntos(int puntos)
-    {
-        this.puntos=puntos;
-    }
-    
-    public int getPuntos()
-    {
-        return puntos;
     }
     
     public void limpiarTabla()
@@ -110,13 +90,11 @@ public class Panel_EntradaJuego extends javax.swing.JPanel {
         jl_MejorPuntuacion = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Puntuaciones = new javax.swing.JTable();
-        jl_NivelJuego = new javax.swing.JLabel();
         btn_Jugar = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
         jl_CampoJuego = new javax.swing.JLabel();
         btn_AcercaDe = new javax.swing.JButton();
         btn_Sonido = new javax.swing.JButton();
-        jcb_NivelJuego = new javax.swing.JComboBox<>();
         jcb_CampoJuego = new javax.swing.JComboBox<>();
         jl_FondoEntrada = new javax.swing.JLabel();
 
@@ -149,11 +127,6 @@ public class Panel_EntradaJuego extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 380, 100));
 
-        jl_NivelJuego.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jl_NivelJuego.setForeground(new java.awt.Color(51, 204, 255));
-        jl_NivelJuego.setText("Nivel de Juego");
-        add(jl_NivelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
-
         btn_Jugar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Jugar.setForeground(new java.awt.Color(51, 204, 255));
         btn_Jugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pistola.gif"))); // NOI18N
@@ -169,7 +142,7 @@ public class Panel_EntradaJuego extends javax.swing.JPanel {
         jl_CampoJuego.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jl_CampoJuego.setForeground(new java.awt.Color(51, 204, 255));
         jl_CampoJuego.setText("Campo de Juego");
-        add(jl_CampoJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+        add(jl_CampoJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
 
         btn_AcercaDe.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_AcercaDe.setForeground(new java.awt.Color(51, 204, 255));
@@ -182,11 +155,8 @@ public class Panel_EntradaJuego extends javax.swing.JPanel {
         btn_Sonido.setActionCommand("Sonido");
         add(btn_Sonido, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 50, 50));
 
-        jcb_NivelJuego.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fácil", "Medio", "Dificil", "NigthMare" }));
-        add(jcb_NivelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 110, -1));
-
-        jcb_CampoJuego.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
-        add(jcb_CampoJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 110, -1));
+        jcb_CampoJuego.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
+        add(jcb_CampoJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 110, -1));
 
         jl_FondoEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/entradaJuego.jpg"))); // NOI18N
         add(jl_FondoEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 360));
@@ -200,11 +170,9 @@ public class Panel_EntradaJuego extends javax.swing.JPanel {
     private javax.swing.JButton btn_Sonido;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcb_CampoJuego;
-    private javax.swing.JComboBox<String> jcb_NivelJuego;
     private javax.swing.JLabel jl_CampoJuego;
     private javax.swing.JLabel jl_FondoEntrada;
     private javax.swing.JLabel jl_MejorPuntuacion;
-    private javax.swing.JLabel jl_NivelJuego;
     private javax.swing.JLabel jl_TituloEntrada;
     private javax.swing.JTable tbl_Puntuaciones;
     // End of variables declaration//GEN-END:variables

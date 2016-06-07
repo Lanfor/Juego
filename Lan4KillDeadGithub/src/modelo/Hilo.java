@@ -10,6 +10,7 @@ public class Hilo extends  Thread
 {
     FRM_VentanaJuego ventana;
     int tiempo=0, timeMusic=0;
+    public boolean corre=false;
     public Hilo(FRM_VentanaJuego ventana) 
     {
         this.ventana=ventana;
@@ -22,8 +23,12 @@ public class Hilo extends  Thread
             try 
             {
                 this.sleep(100);
-                ventana.moverZombies();
-                aumentarTiempo();
+                System.out.println("hilo");
+                if(corre)
+                {
+                    ventana.moverZombies();
+                    aumentarTiempo();
+                }
             } catch (Exception e) 
             {
                 System.err.println("Hubo en error en el hilo de ejecucion run: "+e.getCause());

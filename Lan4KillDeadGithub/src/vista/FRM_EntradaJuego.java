@@ -19,57 +19,36 @@ public class FRM_EntradaJuego extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         controlador_FRM_EntradaJuego=new Controlador_FRM_EntradaJuego(this);
-//        agregarEventos();
+        agregarEventos();
     }
 
-//    public  void agregarEventos()
-//    {
-//        //this.panel_EntradaJuego1.agregarEventos(controlador_FRM_EntradaJuego);
-//    }
-//    public void cambiarEstadoMusica()
-//    {
-//        //this.panel_EntradaJuego1.cambiarEstadoMusica();
-//    }
-//    public String getNivel()
-//    {
-//        //return this.panel_EntradaJuego1.getNivel();
-//    }
-//    
-//    public int getCampo()
-//    {
-//        return this.panel_EntradaJuego1.getCampo();
-//    }
-//    
-//    public void reproducirMusica()
-//    {
-//        this.panel_EntradaJuego1.reproducirMusica();
-//    }
-//    
-//    
-//    public void gane(int puntos, int nivel)
-//    {
-//        this.panel_EntradaJuego1.gane(puntos, nivel);
-//    }
-//    
-//    public void setPuntos(int puntos)
-//    {
-//        panel_EntradaJuego1.setPuntos(puntos);
-//    }
-//    
-//    public int getPuntos()
-//    {
-//        return this.panel_EntradaJuego1.getPuntos();
-//    }
-//    
-//    public void limpiarTabla()
-//    {
-//        this.panel_EntradaJuego1.limpiarTabla();
-//    }
-//    
-//    public void colocarMejoresRecords(String[] record)
-//    {
-//        this.panel_EntradaJuego1.colocarMejoresRecords(record);
-//    }
+    public  void agregarEventos()
+    {
+        this.panel_EntradaJuego1.agregarEventos(controlador_FRM_EntradaJuego);
+    }
+    public void cambiarEstadoMusica()
+    {
+        this.panel_EntradaJuego1.cambiarEstadoMusica();
+    }
+    
+    public int getCampo()
+    {
+        return this.panel_EntradaJuego1.getCampo();
+    }
+    
+    public void reproducirMusica()
+    {
+        this.panel_EntradaJuego1.reproducirMusica();
+    }
+    public void limpiarTabla()
+    {
+        this.panel_EntradaJuego1.limpiarTabla();
+    }
+    
+    public void colocarMejoresRecords(String[] record)
+    {
+        this.panel_EntradaJuego1.colocarMejoresRecords(record);
+    }
     
     
     
@@ -90,10 +69,9 @@ public class FRM_EntradaJuego extends javax.swing.JFrame {
 
         panel_EntradaJuego1 = new vista.Panel_EntradaJuego();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,9 +80,10 @@ public class FRM_EntradaJuego extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-//        controlador_FRM_EntradaJuego.metodosRecord.escribirSobreArchivo();
-    }//GEN-LAST:event_formWindowClosing
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        controlador_FRM_EntradaJuego.metodosRecord.escribirSobreArchivo();
+        System.exit(0);
+    }//GEN-LAST:event_formComponentHidden
 
     /**
      * @param args the command line arguments

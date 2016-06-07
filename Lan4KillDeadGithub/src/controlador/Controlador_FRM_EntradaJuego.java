@@ -46,13 +46,13 @@ public class Controlador_FRM_EntradaJuego implements ActionListener
                 hilo_Espera.start();
             break;
             case "Salir":
-                System.exit(0);
+                fRM_EntradaJuego.hide();
             break;
             case "Acerca De":
                 System.out.println("Acerca De");
             break;
             case "Sonido":
-//                fRM_EntradaJuego.cambiarEstadoMusica();
+                fRM_EntradaJuego.cambiarEstadoMusica();
             break;
         }
     }

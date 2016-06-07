@@ -40,6 +40,7 @@ public class Hilo_Espera extends Thread
                     {
                         controlador.fRM_Espera.setVisible(false);
                         controlador.fRM_VentanaJuego.setVisible(true);
+                        controlador.fRM_VentanaJuego.inicializarValores();
                         espera=0;
                      stop();
                     }
