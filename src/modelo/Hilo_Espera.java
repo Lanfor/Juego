@@ -40,8 +40,11 @@ public class Hilo_Espera extends Thread
                     {
                         controlador.fRM_Espera.setVisible(false);
                         controlador.fRM_VentanaJuego.setVisible(true);
+<<<<<<< HEAD
                         controlador.fRM_VentanaJuego.inicializarValores();
                         
+=======
+>>>>>>> origin/master
                         espera=0;
                      stop();
                     }

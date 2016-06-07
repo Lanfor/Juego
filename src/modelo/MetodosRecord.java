@@ -56,7 +56,11 @@ public class MetodosRecord
         fRM_EntradaJuego.limpiarTabla();
         for (int i = 0; i < array.size(); i++) 
         {
+<<<<<<< HEAD
             if(i<6)
+=======
+            if(i<5)
+>>>>>>> origin/master
             {
                 record[0]=array.get(i).getNombre();
                 record[1]=array.get(i).getRecord();
