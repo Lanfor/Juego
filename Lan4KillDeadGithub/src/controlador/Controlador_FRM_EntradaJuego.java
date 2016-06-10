@@ -51,7 +51,7 @@ public class Controlador_FRM_EntradaJuego implements ActionListener
             case "Acerca De":
                 fRM_EntradaJuego.mostrarMensaje(
                         "EN EL PLANETA COCHOCHOMBO HA SURGIDO UNA EPIDEMIA DE ZOMBIES\n"
-                      + "DONDE ESTOS QUIEREN COMERCE LOS PARTE DE LOS HABITANTES DEL\n"
+                      + "DONDE ESTOS QUIEREN COMERCE A TODOS LOS HABITANTES DEL PLANETA\n"
                       + "SU OBJETIVO ES COMER CEREBROS YA QUE ELLOS, ZOMBIENTONTOS, PERO\n"
                       + " AÚN QUEDA UNA ESPERANZA, TÚ TIENES LAS HABILIDADES NECERIAS PARA\n"
                       + "DESTRUIRLOS CON EL FRANCOTIRADOR, VAMOS HASLO POR COCHOCHOMBO");
