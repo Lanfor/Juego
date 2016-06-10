@@ -7,6 +7,7 @@ package vista;
 
 import controlador.Controlador_FRM_EntradaJuego;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +32,10 @@ public class FRM_EntradaJuego extends javax.swing.JFrame {
         this.panel_EntradaJuego1.cambiarEstadoMusica();
     }
     
+    public void mostrarMensaje(String msj)
+    {
+        JOptionPane.showMessageDialog(this, msj);
+    }
     public int getCampo()
     {
         return this.panel_EntradaJuego1.getCampo();

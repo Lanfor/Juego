@@ -49,7 +49,12 @@ public class Controlador_FRM_EntradaJuego implements ActionListener
                 fRM_EntradaJuego.hide();
             break;
             case "Acerca De":
-                System.out.println("Acerca De");
+                fRM_EntradaJuego.mostrarMensaje(
+                        "EN EL PLANETA COCHOCHOMBO HA SURGIDO UNA EPIDEMIA DE ZOMBIES\n"
+                      + "DONDE ESTOS QUIEREN COMERCE LOS PARTE DE LOS HABITANTES DEL\n"
+                      + "SU OBJETIVO ES COMER CEREBROS YA QUE ELLOS, ZOMBIENTONTOS, PERO\n"
+                      + " AÚN QUEDA UNA ESPERANZA, TÚ TIENES LAS HABILIDADES NECERIAS PARA\n"
+                      + "DESTRUIRLOS CON EL FRANCOTIRADOR, VAMOS HASLO POR COCHOCHOMBO");
             break;
             case "Sonido":
                 fRM_EntradaJuego.cambiarEstadoMusica();
